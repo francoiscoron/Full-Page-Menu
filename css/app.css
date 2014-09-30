@@ -98,6 +98,16 @@ body {
         opacity: 1;
         visibility: visible; } }
 
+.nav--items {
+  padding: 0;
+  margin: 0;
+  list-style: none; }
+  .nav--items li {
+    display: inline-block; }
+  @media screen and (max-width: 600px) {
+    .nav--items li {
+      display: block; } }
+
 section {
   text-align: center;
   max-width: 600px;
