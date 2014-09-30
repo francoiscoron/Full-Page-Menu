@@ -1,0 +1,112 @@
+@import "compass";
+
+// Variables
+$device: 600px;
+
+// Mixins
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
+    @content;
+  }
+}
+
+body {
+  font-family: sans-serif;
+  padding: 0;margin: 0;
+}
+
+.header {
+  height: 80px;
+  border-bottom: 1px solid #CCC;
+}
+
+.menu-icon {
+  display: none;
+  position: absolute;
+  right: 15px; top: 15px;
+  padding: 20px;
+  z-index: 3;
+
+  @include media-query($device) {
+    display: block;
+  }
+
+}
+
+.menu-icon--bar{
+  display: block;
+  width: 24px; height: 4px;
+  background: #333;
+
+  &:after, &:before {
+    content: '';
+    position: absolute;
+    display: block;
+    width: 24px; height: 4px;
+    background: #333;
+    @include transition-duration(.3s);
+  }
+
+  &:before { margin-top: -8px; }
+  &:after { margin-top: 8px; }
+
+  &.show {
+    background-color: transparent;
+
+    &:before {
+      margin-top: 0;
+      background: #C04848;
+      @include transform(rotate(-45deg));
+    }
+
+    &:after {
+      margin-top: 0;
+      background: #C04848;
+      @include transform(rotate(45deg));
+    }
+  }
+
+}
+
+.nav {
+  padding: 2rem 1rem;
+
+  a {
+    text-decoration: none;
+    display: inline-block;
+    text-transform: uppercase;
+    color: #333;
+    border-bottom: 3px solid transparent;
+    padding: 0 .3rem;
+  }
+
+  @include media-query($device) {
+    position: fixed;
+    visibility: hidden;
+    opacity: 0;
+    left: 0; right: 0; top: 0; bottom: 0;
+    background:rgba(#FFF, .9);
+    text-align: left;
+    z-index: 2;
+
+    @include transition(opacity .2s ease-in-out);
+
+    a {
+      font-size: 2rem;
+      display: block;
+      margin: 1rem 0;
+      border-bottom: none;
+
+      @include transition(margin-left .2s ease-in-out);
+
+      &:hover {
+        margin-left: 1rem;
+      }
+    }
+
+    &.show {
+      opacity: 1;
+      visibility: visible;
+    }
+  }
+}
